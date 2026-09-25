@@ -1,0 +1,80 @@
+.player {
+  position: fixed;
+  left: 18px;
+  bottom: 16px;
+  z-index: 80;
+  display: block;
+  width: 136px;
+  filter: drop-shadow(0 6px 0 rgba(0, 0, 0, 0.35));
+  transition: transform 0.2s steps(3);
+  transform: rotate(-4deg);
+}
+.player:hover {
+  transform: rotate(-1deg) translateY(-3px);
+}
+.player svg {
+  display: block;
+}
+
+.label {
+  position: absolute;
+  left: 20px;
+  top: 21px;
+  width: 96px;
+  height: 18px;
+  overflow: hidden;
+  font-family: var(--f-term);
+  font-size: 15px;
+  line-height: 18px;
+  color: var(--sepia);
+  white-space: nowrap;
+}
+.marquee {
+  display: inline-flex;
+  gap: 28px;
+}
+.on .marquee {
+  animation: marquee 9s linear infinite;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(calc(-50% - 14px));
+  }
+}
+
+.state {
+  display: block;
+  margin-top: 4px;
+  text-align: center;
+  font-family: var(--f-tiny);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--faded);
+}
+.on .state {
+  color: var(--amber);
+}
+
+.hub {
+  transform-box: view-box;
+}
+.on .hub {
+  animation: spin 0.8s steps(4) infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 640px), (max-height: 520px) {
+  .player {
+    left: 8px;
+    bottom: 8px;
+    transform: scale(0.7) rotate(-4deg);
+    transform-origin: bottom left;
+  }
+  .player:hover {
+    transform: scale(0.7) rotate(-1deg);
+  }
+}

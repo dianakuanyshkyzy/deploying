@@ -1,0 +1,411 @@
+.fly {
+  position: relative;
+  margin-top: -64px;
+  transform-origin: center;
+}
+.stage {
+  position: relative;
+}
+.inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: top left;
+}
+
+/* ───────── the deck ───────── */
+.deck {
+  position: absolute;
+  left: 270px;
+  top: 40px;
+  width: 520px;
+  height: 440px;
+  border-radius: 20px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='l'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.05 0 0 0 0 0.03 0 0 0 0.3 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23l)'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, #4a2e20 0%, #2f1d14 100%);
+  box-shadow:
+    0 0 0 4px #0e0a08,
+    inset 0 3px 0 rgba(255, 220, 180, 0.12),
+    inset 0 -6px 0 rgba(0, 0, 0, 0.3),
+    0 30px 60px rgba(0, 0, 0, 0.55),
+    10px 14px 0 rgba(0, 0, 0, 0.35);
+  z-index: 2;
+}
+.deckTop {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 18px 26px 0;
+}
+.brand {
+  font-family: var(--f-pixel);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  text-shadow: 2px 2px 0 #0e0a08;
+}
+.model {
+  font-family: var(--f-tiny);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--faded);
+  text-transform: uppercase;
+}
+.led {
+  margin-left: auto;
+  width: 10px;
+  height: 10px;
+  background: #3a1d18;
+  box-shadow: 0 0 0 2px #0e0a08;
+  align-self: center;
+}
+.ledOn {
+  background: var(--amber);
+  box-shadow: 0 0 0 2px #0e0a08, 0 0 12px var(--amber);
+  animation: ledPulse 1.2s steps(2) infinite;
+}
+@keyframes ledPulse {
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.window {
+  position: absolute;
+  left: 26px;
+  top: 58px;
+  width: 468px;
+  height: 262px;
+  display: grid;
+  place-items: center;
+  background: #120c09;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 3px #0e0a08, inset 0 10px 30px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+}
+.cassette {
+  width: 384px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.6));
+}
+.hub {
+  transform-box: view-box;
+}
+.spin {
+  animation: spin 1s steps(6) infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* handwritten title sitting on the cassette label */
+.label {
+  position: absolute;
+  left: 80px;
+  right: 80px;
+  top: 50px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.labelTitle {
+  font-family: var(--f-scrawl);
+  font-size: 26px;
+  line-height: 1;
+  color: var(--sepia);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.glass {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, rgba(255, 240, 220, 0.09) 0%, rgba(255, 240, 220, 0.02) 35%, transparent 36%, transparent 60%, rgba(255, 240, 220, 0.05) 61%, transparent 75%);
+}
+
+.controls {
+  position: absolute;
+  left: 26px;
+  right: 26px;
+  bottom: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.buttons {
+  display: flex;
+  gap: 16px;
+}
+.buttons :global(.pixel-btn) {
+  min-width: 56px;
+  padding: 8px 12px 10px;
+}
+.play {
+  min-width: 70px !important;
+}
+.meter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+.segments {
+  display: flex;
+  gap: 3px;
+  padding: 4px;
+  background: #140e0b;
+  box-shadow: 0 0 0 2px #0e0a08;
+}
+.segments span {
+  width: 7px;
+  height: 14px;
+  background: #3a2419;
+}
+.segments .segOn {
+  background: var(--amber);
+  box-shadow: 0 0 6px rgba(231, 184, 114, 0.45);
+}
+.segments .segOn:nth-last-child(-n + 4) {
+  background: var(--rose);
+}
+.time {
+  font-family: var(--f-term);
+  font-size: 20px;
+  color: var(--paper-2);
+}
+
+/* ───────── J-card track list ───────── */
+.jcard {
+  position: absolute;
+  left: 12px;
+  top: 78px;
+  width: 280px;
+  height: 400px;
+  padding: 0 46px 18px 22px;
+  background-color: #efe3c9;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.35 0 0 0 0 0.2 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  color: var(--sepia);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+.jTape {
+  position: absolute;
+  top: -12px;
+  left: 30px;
+  width: 80px;
+  height: 24px;
+  rotate: -6deg;
+  background: repeating-linear-gradient(90deg, rgba(183, 125, 112, 0.75) 0 7px, rgba(232, 207, 188, 0.75) 7px 14px);
+  clip-path: polygon(2% 8%, 8% 0, 94% 4%, 100% 20%, 96% 42%, 100% 70%, 97% 100%, 4% 94%, 0 70%, 4% 45%, 0 22%);
+}
+.jStripes {
+  height: 26px;
+  margin: 0 -46px 0 -22px;
+  background: linear-gradient(
+    180deg,
+    #7a2b2f 0 8px,
+    #efe3c9 8px 10px,
+    #8a4a33 10px 16px,
+    #efe3c9 16px 18px,
+    #b8925a 18px 22px,
+    transparent 22px
+  );
+}
+.jSide {
+  margin: 8px 0 0;
+  font-family: var(--f-pixel);
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--wine);
+}
+.jTitle {
+  margin: 0 0 10px;
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 26px;
+  line-height: 1.1;
+}
+.tracks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 250px;
+  overflow-y: auto;
+}
+.tracks li {
+  border-bottom: 1px solid rgba(58, 42, 32, 0.25);
+}
+.tracks button {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 6px;
+  width: 100%;
+  padding: 7px 2px 6px;
+  text-align: left;
+}
+.tracks button:hover .tTitle {
+  text-decoration: underline wavy rgba(122, 43, 47, 0.5);
+}
+.num {
+  grid-row: span 2;
+  align-self: center;
+  font-family: var(--f-term);
+  font-size: 20px;
+  color: var(--faded);
+}
+.tTitle {
+  font-family: var(--f-hand);
+  font-size: 17px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tArtist {
+  font-family: var(--f-tiny);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: var(--faded);
+  text-transform: uppercase;
+}
+.current .num,
+.current .tTitle {
+  color: var(--wine-2);
+}
+.jFrom {
+  position: absolute;
+  left: 22px;
+  right: 46px;
+  bottom: 12px;
+  margin: 0;
+  font-family: var(--f-scrawl);
+  font-size: 21px;
+  line-height: 1;
+  color: var(--wine-2);
+}
+
+/* ───────── the note taped on top ───────── */
+.noteSlot {
+  position: absolute;
+  left: 700px;
+  top: 0;
+  width: 280px;
+  z-index: 3;
+}
+.note {
+  position: relative;
+  padding: 26px 22px 34px;
+  background-color: #f3ead3;
+  background-image:
+    linear-gradient(90deg, transparent 18px, rgba(122, 43, 47, 0.25) 18px 19.5px, transparent 19.5px),
+    repeating-linear-gradient(to bottom, transparent 0 25px, rgba(90, 70, 110, 0.16) 25px 26px);
+  background-position: 0 0, 0 58px;
+  color: #2c1e17;
+  box-shadow: 4px 12px 22px rgba(0, 0, 0, 0.45);
+  /* torn bottom edge */
+  clip-path: polygon(0 0, 100% 0, 100% 96%, 94% 99%, 88% 96.5%, 81% 99.5%, 74% 97%, 66% 99.5%, 58% 96.5%, 50% 99%, 42% 97%, 34% 99.5%, 26% 96.5%, 18% 99%, 10% 97%, 4% 99.5%, 0 97%);
+}
+.noteTape {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  margin-left: -44px;
+  width: 88px;
+  height: 26px;
+  rotate: 3deg;
+  background:
+    radial-gradient(circle, rgba(244, 235, 217, 0.8) 1.3px, transparent 1.8px) 0 0 / 8px 8px,
+    rgba(111, 109, 68, 0.6);
+}
+.noteKicker {
+  margin: 0;
+  font-family: var(--f-tiny);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faded);
+}
+.noteTitle {
+  margin: 4px 0 8px;
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.15;
+  color: var(--wine);
+}
+.noteTitle span {
+  font-size: 15px;
+  color: var(--faded);
+}
+.noteBody {
+  margin: 0;
+  padding-left: 6px;
+  font-family: var(--f-hand);
+  font-size: 16px;
+  line-height: 26px;
+  white-space: pre-line;
+}
+.noteHeart {
+  position: absolute;
+  right: 18px;
+  bottom: 14px;
+}
+
+/* ───────── stacked layout for portrait phones ───────── */
+.tall .noteSlot {
+  left: 130px;
+  top: 0;
+  width: 380px;
+}
+.tall .note {
+  padding: 28px 26px 38px;
+}
+.tall .noteTitle {
+  font-size: 28px;
+}
+.tall .noteBody {
+  font-size: 21px;
+  line-height: 32px;
+}
+.tall .noteKicker {
+  font-size: 11px;
+}
+.tall .deck {
+  left: 0;
+  top: 200px;
+}
+.tall .jcard {
+  left: 36px;
+  top: 660px;
+  width: 448px;
+  height: 364px;
+  padding-right: 24px;
+}
+.tall .jStripes {
+  margin-right: -24px;
+}
+.tall .tTitle {
+  font-size: 22px;
+}
+.tall .tArtist {
+  font-size: 10px;
+}
+.tall .tracks {
+  max-height: 214px;
+}
+.tall .jFrom {
+  right: 24px;
+  text-align: right;
+  font-size: 24px;
+}
