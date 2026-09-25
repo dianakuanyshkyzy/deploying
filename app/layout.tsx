@@ -14,7 +14,7 @@ import { MusicPlayer } from "@/components/music/MusicPlayer";
 
 export const metadata: Metadata = {
   title: `for ${content.him.replace(/[[\]]/g, "")}`,
-  description: "one month.",
+  description: "one month<3",
 };
 
 export const viewport: Viewport = {
